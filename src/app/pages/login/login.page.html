@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Login</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="login-logo">
+        <img src="https://www.masterdevel.com/_nuxt/img/4ab4047.svg" alt="Logo" />
+    </div>
+
+    <form #loginForm="ngForm" novalidate class="ion-padding">
+        <ion-list>
+            <ion-item>
+                <ion-label position="stacked" color="primary">Key</ion-label>
+                <ion-input [(ngModel)]="credential.key" name="key" type="text" #key="ngModel"
+                    spellcheck="false" autocapitalize="off" required>
+                </ion-input>
+            </ion-item>
+
+            <ion-text color="danger">
+                <p [hidden]="key.valid || submitted == false" class="ion-padding-start">
+                    key is required
+                </p>
+            </ion-text>
+
+            <ion-item>
+                <ion-label position="stacked" color="primary">Password</ion-label>
+                <ion-input [(ngModel)]="credential.shared_secret" name="password" [type]="view?'text':'password'"
+                    #password="ngModel" required>
+                </ion-input>
+                <ion-icon slot="end" name="{{'eye'+(view?'-off':'')}}" (click)="view=!view"></ion-icon>
+            </ion-item>
+
+            <ion-text color="danger">
+                <p [hidden]="password.valid || submitted == false" class="ion-padding-start">
+                    Password is required
+                </p>
+            </ion-text>
+        </ion-list>
+
+        <ion-row>
+            <ion-col>
+                <ion-button (click)="onLogin(loginForm)" type="submit" expand="block">Login</ion-button>
+            </ion-col>
+            <!-- <ion-col>
+              <ion-button (click)="onSignup()" color="light" expand="block">Signup</ion-button>
+          </ion-col> -->
+        </ion-row>
+    </form>
+</ion-content>

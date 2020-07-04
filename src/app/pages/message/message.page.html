@@ -1,0 +1,69 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button [defaultHref]="'/messages'"></ion-back-button>
+        </ion-buttons>
+        <ion-title>message</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+    <ion-fab vertical="top" horizontal="end" slot="fixed" edge *ngIf="!fieldsetDisabled">
+        <ion-fab-button (click)="submit(submitForm)">
+            <ion-icon name="bookmark"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+
+    <form #submitForm="ngForm" novalidate (ngSubmit)="submit(submitForm)">
+        <fieldset [disabled]="fieldsetDisabled">
+            <ion-list>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size-xl="4" size-lg="6">
+                            <ion-item>
+                                <ion-label position="stacked" color="primary">Message</ion-label>
+                                <ion-textarea [(ngModel)]="message.msg" name="msg">
+                                </ion-textarea>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <ion-row>
+                        <ion-col size-xl="4" size-lg="6">
+                            <ion-item>
+                                <ion-label position="stacked" color="primary">
+                                    Tags
+                                </ion-label>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                    <p class="ion-text-right">
+                        <ion-chip *ngFor="let tag of message.tags; let i = index;" color="dark">
+                            <ion-label>{{tag}}</ion-label>
+                            <ion-icon name="close" (click)="message.tags.splice(i, 1)" *ngIf="!fieldsetDisabled">
+                            </ion-icon>
+                        </ion-chip>
+                    </p>
+                </ion-grid>
+            </ion-list>
+            <ion-list *ngIf="!fieldsetDisabled">
+                <ion-grid>
+                    <ion-row>
+                        <ion-col size-xl="4" size-lg="6">
+                            <ion-item>
+                                <ion-label position="stacked" color="primary">Tag</ion-label>
+                                <ion-input [(ngModel)]="tag" name="tag" type="text"></ion-input>
+                                <ion-button fill="outline" slot="end" (click)="addTags()">
+                                    <ion-icon color="primary" slot="end" name="add"></ion-icon>
+                                    Add
+                                </ion-button>
+                            </ion-item>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-list>
+        </fieldset>
+    </form>
+
+</ion-content>

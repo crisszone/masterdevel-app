@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Messages</ion-title>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-searchbar name="tag" [(ngModel)]="tag" placeholder="Tag"></ion-searchbar>
+        <ion-button slot="end" (click)="doRefresh()" color="secondary">
+            <ion-icon slot="end" name="search"></ion-icon>
+            Search
+        </ion-button>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button [routerLink]="['/messages/message/']">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+
+    <ion-card *ngFor="let message of messages;">
+        <ion-card-content [routerLink]="['/messages/message/'+message._id]">
+            {{message.msg}}
+            <hr>
+            <p class="ion-text-right">
+                <ion-chip *ngFor="let tag of message.tags; let i = index;" color="dark">
+                    <ion-label>{{tag}}</ion-label>
+                </ion-chip>
+            </p>
+        </ion-card-content>
+    </ion-card>
+
+</ion-content>
