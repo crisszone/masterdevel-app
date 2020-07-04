@@ -50,7 +50,6 @@ export class SessionService {
             let info = await this.storage.get(SESSION_KEY);
             await this.setSession(info, true);
         } catch (error) {
-            console.error(error)
             this.router.navigateByUrl('/');
         }
     }

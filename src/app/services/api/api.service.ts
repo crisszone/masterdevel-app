@@ -58,7 +58,6 @@ export class ApiService {
             option.headers['X-Signature'] = crypto
                 .HmacSHA256(message, this.sharedSecret)
                 .toString(crypto.enc.Hex);
-            console.log(option.headers, message)
         }
 
         try {
