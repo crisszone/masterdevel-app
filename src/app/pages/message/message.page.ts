@@ -40,7 +40,7 @@ export class MessagePage {
         }
     }
 
-    addTags(tag) {
+    public addTags() {
         this.tag.trim().split(' ').forEach((t: string) => this.message.tags.push(t))
         this.tag = null;
     }
